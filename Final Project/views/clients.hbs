@@ -1,0 +1,111 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+   <div class="container">
+       <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">Travel Agency Website</a>
+       </div>
+       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/finances">Finances</a></li>
+                  <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Flights<span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                    <li><a href="/addFlight">Book A Flight</a></li>
+                                    <li><a href="/myFlights">Booked Flights</a></li>
+                              </ul>
+                  </li>
+                  <li><a href="/clients">Clients</a></li>
+                  <li><a href="/settings">Settings</a></li>
+                  <li><a href="/logout"><button type="button" class="btn btn-light btn-xs">Logout</button></a></li>
+            </ul>
+      </div>
+  </div>
+</nav>
+<div class="jumbotron">
+  <div class="container">
+    <h1>My Clients</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Client</th>
+          <th scope="col">Flights Booked</th>
+          <th scope="col">View Flights</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each clients}}
+          <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.flights.length}}</td>
+            <td><a href="/clients/{{this.slug}}"><u>flights</u></a></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{{#if clientSelected}}
+  <h2>Flights of {{clientName}}</h2>
+  <form method="POST">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Origin</th>
+          <th scope="col">Destination</th>
+          <th scope="col">Price</th>
+          <th scope="col">Airline</th>
+          <th scope="col">Flight Type</th>
+          <th scope="col">Booked Time</th>
+          <th scope="col">To Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each clientFlights}}
+          <tr>
+            <td>{{this.origin}}</td>
+            <td>{{this.destination}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.airline.name}}</td>
+            <td>{{this.type}}</td>
+            <td>{{this.bookedTime}}</td>
+            <td><input type="checkbox" name="{{this._id}}"></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <input type='submit' class="btn btn-danger" name="delete" value="Remove Client Flight">
+  </form>
+  {{#if flightDeleted}}
+    <div class="invalid-feedback" style="color:green">
+      Flight removed successfully.
+    </div>
+  {{/if}}
+{{/if}}
+<hr>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Client</h2>
+      <p>
+        Check out the list of clients that have booked with your agency, their number of flights booked with you.
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h2>View Flights</h2>
+      <p>
+        Access each clients flight list with the 'view flights' button and look at all of the client's flights.
+      </p>
+   </div>
+  </div>
+  <hr>
+  <footer>
+    <p>&copy; 2017 Travel Agency, Inc.</p>
+  </footer>
+</div>

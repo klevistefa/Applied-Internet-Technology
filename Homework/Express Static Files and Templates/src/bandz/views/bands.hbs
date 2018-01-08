@@ -1,0 +1,43 @@
+<hr>
+<form method = "GET", action ="">
+  <input type = "radio" name = "filterGenre" id = "rock" value = "rock">
+  <label for = "rock">Rock</label>
+  <input type = "radio" name = "filterGenre" id = "pop" value = "pop">
+  <label for = "pop">Pop</label>
+  <input type = "radio" name = "filterGenre" id = "hip-hop" value = "hip-hop">
+  <label for = "hip-hop">Hip-Hop</label>
+  <input type = "radio" name = "filterGenre" id = "electronic" value = "electronic">
+  <label for = "electronic">Electronic</label>
+  <input type = "radio" name = "filterGenre" id = "metal" value = "metal">
+  <label for = "metal">Metal</label>
+  <input type = "radio" name = "filterGenre" id = "jazz" value = "jazz">
+  <label for = "jazz">Jazz</label>
+  <input type = "submit" value = "Filter by Genre!">
+</form>
+<hr>
+<h2>Recommended Bandz</h2>
+<ul>
+  {{# each bands}}
+    <li>{{this.name}} ({{this.genre}}) - {{this.description}} | <i>{{this.location}}</i>
+  {{/each}}
+</ul>
+<hr>
+<h2>Add a Band Recommendation</h2>
+<form method = "POST" action ="">
+  Band Name: <input type = "text" name = "name"><br>
+  Location: <input type = "text" name = "location"><br>
+  Description: <input type = "text" name = "description"><br>
+  <input type = "radio" name = "filterGenre" id = "rock" value = "rock">
+  <label for = "rock">Rock</label>
+  <input type = "radio" name = "filterGenre" id = "pop" value = "pop">
+  <label for = "pop">Pop</label>
+  <input type = "radio" name = "filterGenre" id = "hip-hop" value = "hip-hop">
+  <label for = "hip-hop">Hip-Hop</label>
+  <input type = "radio" name = "filterGenre" id = "electronic" value = "electronic">
+  <label for = "electronic">Electronic</label>
+  <input type = "radio" name = "filterGenre" id = "metal" value = "metal">
+  <label for = "metal">Metal</label>
+  <input type = "radio" name = "filterGenre" id = "jazz" value = "jazz">
+  <label for = "jazz">Jazz</label>
+  <input type = "submit" value = "Add band">
+</form>

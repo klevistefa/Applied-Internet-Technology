@@ -1,0 +1,22 @@
+body{
+  background-image: url(tableBackground.png);
+  text-align: center;
+}
+div {
+  width: 700px ;
+  margin-left: auto ;
+  margin-right: auto ;
+}
+
+div.start label {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+img {
+  width: 200px;
+  height: 300px;
+}

@@ -1,0 +1,316 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+   <div class="container">
+       <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">Travel Agency Website</a>
+       </div>
+       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/finances">Finances</a></li>
+                  <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Flights<span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                    <li><a href="/addFlight">Book A Flight</a></li>
+                                    <li><a href="/myFlights">Booked Flights</a></li>
+                              </ul>
+                  </li>
+                  <li><a href="/clients">Clients</a></li>
+                  <li><a href="/settings">Settings</a></li>
+                  <li><a href="/logout"><button type="button" class="btn btn-light btn-xs">Logout</button></a></li>
+            </ul>
+      </div>
+  </div>
+</nav>
+<div class="jumbotron">
+  <div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+      <li class="nav-item {{#if accountActive}}active{{/if}}">
+        <a class="nav-link active" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="home" aria-selected="true">Account Settings</a>
+      </li>
+
+      <li class="nav-item {{#if financeActive}}active{{/if}}">
+        <a class="nav-link" id="finance-tab" data-toggle="tab" href="#finance" role="tab" aria-controls="profile" aria-selected="false">Finances</a>
+      </li>
+
+      <li class="nav-item {{#if airlineActive}}active{{/if}}">
+        <a class="nav-link" id="airline-tab" data-toggle="tab" href="#airline" role="tab" aria-controls="contact" aria-selected="false">Add Airlines</a>
+      </li>
+
+      <li class="nav-item {{#if removalActive}}active{{/if}}">
+        <a class="nav-link" id="removal-tab" data-toggle="tab" href="#removal" role="tab" aria-controls="contact" aria-selected="false">Removals</a>
+      </li>
+
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade {{#if accountActive}}active in{{/if}}" id="account" role="tabpanel" aria-labelledby="account-tab">
+
+        <form method="POST" action="./settings/account">
+
+          <div class="form-group">
+            <label for="currentPassword">Current Password:</label>
+            <input type="password" class="form-control" name="currentPassword" placeholder="Current password" required>
+          </div>
+
+          <div class="form-group">
+            <label for="newPassword">New Password:</label>
+            <input type="password" class="form-control" name="newPassword" placeholder="Enter new password" required>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm New Password:</label>
+            <input type="password" class="form-control" name="confirmPassword" placeholder="Re-enter new password here" required>
+          </div>
+
+          {{#if wrongCurrentPassword}}
+            <div class="invalid-feedback" style="color:red">
+              This is not the current password (Try Again).
+            </div>
+          {{/if}}
+
+          {{#if wrongConfirm}}
+            <div class="invalid-feedback" style="color:red">
+              The 'New Password' must match the 'Current New Password' (Try Again).
+            </div>
+          {{/if}}
+
+          {{#if passChanged}}
+            <div class="invalid-feedback" style="color:green">
+              Password changes successfully.
+            </div>
+          {{/if}}
+
+          <button type="submit" class="btn btn-primary">Change Password</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+            Delete Account
+          </button>
+        </form>
+
+        <form method="POST" action="">
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title" id="exampleModalLabel">Permanent Delete</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to delete your account? You will be deleted permanently and you will all the data!</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-danger">I'm Sure</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="tab-pane fade {{#if financeActive}}active in{{/if}}" id="finance" role="tabpanel" aria-labelledby="finance-tab">
+        <form method="POST" action="./settings/finances">
+
+          <div class="form-group">
+            <label for="rentInput">Rent:</label>
+            <input type="number" class="form-control" name="rentInput" placeholder="Monthly rent" step="0.1" min="0" value="{{rent}}" required>
+          </div>
+
+          <div class="form-group">
+            <label for="utilitiesInput">Utilities:</label>
+            <input type="text" class="form-control" name="utilitiesInput" placeholder="Monthly utilities" step="0.1" min="0" value={{utilities}} required>
+          </div>
+
+          {{#if financeActive}}
+            <div class="invalid-feedback" style="color:green">
+              Finances settings are updated successfully.
+            </div>
+          {{/if}}
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade {{#if airlineActive}}active in{{/if}}" id="airline" role="tabpanel" aria-labelledby="airline-tab">
+        <form method="POST" action="./settings/airline">
+
+          <div class="form-group">
+            <label for="airlineInput">Airline Name: </label>
+            <input type="text" class="form-control" name="airlineInput" id="airlineInput" aria-describedby="airlineHelp" placeholder="Airline Company Name">
+            <small id="airlineHelp" class="form-text text-muted">Enter an airline's company name to be added to the list of available airlines.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="profitPercentage">Profit %</label>
+            <select class="form-control" name="profitPercentage">
+              <option>0.05</option>
+              <option>0.10</option>
+              <option>0.15</option>
+              <option>0.20</option>
+              <option>0.25</option>
+            </select>
+          </div>
+
+          {{#if airlineActive}}
+            <div class="invalid-feedback" style="color:green">
+              The new airline is added successfully.
+            </div>
+          {{/if}}
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade {{#if removalActive}}active in{{/if}}" id="removal" role="tabpanel" aria-labelledby="removal-tab">
+
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-client-tab" data-toggle="pill" href="#v-pills-client" role="tab" aria-controls="v-pills-client" aria-selected="true">Client</a>
+          <a class="nav-link" id="v-pills-airline-tab" data-toggle="pill" href="#v-pills-airline" role="tab" aria-controls="v-pills-airline" aria-selected="false">Airline</a>
+          <a class="nav-link" id="v-pills-flight-tab" data-toggle="pill" href="#v-pills-flight" role="tab" aria-controls="v-pills-flight" aria-selected="false">Flight</a>
+        </div>
+
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade active" id="v-pills-client" role="tabpanel" aria-labelledby="v-pills-client-tab">
+            <form method="POST" action="./settings/removals">
+              <table class="table table-striped">
+
+                <thead>
+                  <tr>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Flights Booked</th>
+                    <th scope="col">To Delete</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {{#each client}}
+                    <tr>
+                      <td>{{this.name}}</td>
+                      <td>{{this.flights.length}}</td>
+                      <td><input type="checkbox" name="{{_id}}"></td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+
+              </table>
+              <input type="submit" class = "btn btn-danger" name = "deleteClient" value="Delete">
+            </form>
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-airline" role="tabpanel" aria-labelledby="v-pills-airline-tab">
+            <form method="POST" action="./settings/removals">
+              <table class="table table-striped">
+
+                <thead>
+                  <tr>
+                    <th scope="col">Airline Name</th>
+                    <th scope="col">Profit fraction</th>
+                    <th scope="col">To Delete</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {{#each airline}}
+                    <tr>
+                      <td>{{this.name}}</td>
+                      <td>{{this.profit}}</td>
+                      <td><input type="checkbox" name="{{_id}}"></td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+
+              </table>
+              <input type="submit" class = "btn btn-danger" name = "deleteAirline" value="Delete">
+            </form>
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-flight" role="tabpanel" aria-labelledby="v-pills-flight-tab">
+            <form method="POST" action="./settings/removals">
+              <table class="table table-striped">
+
+                <thead>
+                  <tr>
+                    <th scope="col">Client</th>
+                    <th scope="col">Origin</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Airline</th>
+                    <th scope="col">Flight Type</th>
+                    <th scope="col">Booked Time</th>
+                    <th scope="col">To Delete</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {{#each flight}}
+                    <tr>
+                      <td>{{this.client}}</td>
+                      <td>{{this.origin}}</td>
+                      <td>{{this.destination}}</td>
+                      <td>{{this.price}}</td>
+                      <td>{{this.airline.name}}</td>
+                      <td>{{this.type}}
+                      <td>{{this.bookedTime}}</td>
+                      <td><input type="checkbox" name="{{_id}},{{this.client}}"></td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+
+              </table>
+              <input type="submit" class="btn btn-danger" name = "deleteFlight" value="Delete">
+            </form>
+          </div>
+
+          {{#if removalActive}}
+            <div class="invalid-feedback" style="color:green">
+              Item(s) are removed successfully.
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>Account</h2>
+      <p>
+        Provides the option of changing the password of the current user. You can also delete the account but all the data will be lost.
+      </p>
+    </div>
+
+    <div class="col-md-3">
+      <h2>Finances</h2>
+      <p>
+        Make changes to some financial constants such as rent, or utilities. More settings in this aspect will be added soon.
+      </p>
+   </div>
+
+    <div class="col-md-3">
+      <h2>Airlines</h2>
+      <p>
+        Add new airlines that you can book flights with along with their provided profit.
+      </p>
+    </div>
+
+    <div class="col-md-3">
+      <h2>Removals</h2>
+      <p>
+        Provides a means to delete clients, airlines, or flights. The removals are unrecoverable.
+      </p>
+    </div>
+  </div>
+
+  <hr>
+
+  <footer>
+    <p>&copy; 2017 Travel Agency, Inc.</p>
+  </footer>
+</div>

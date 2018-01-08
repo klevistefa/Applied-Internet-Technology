@@ -1,0 +1,30 @@
+body{
+  background-image: url("/background.jpg");
+}
+
+h1 {
+  color: #02afc5
+}
+
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0
+}
+
+ul li{
+  display: inline;
+}
+
+a:link{
+  color: #a9f3fd
+}
+
+a:visited{
+  color: #35c9dd
+}

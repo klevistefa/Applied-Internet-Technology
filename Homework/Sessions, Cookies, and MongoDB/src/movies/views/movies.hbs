@@ -1,0 +1,31 @@
+<h1>Movies Night!</h1>
+<hr>
+<form method="GET" action="">
+	<label for="director">Director: </label>
+	<input type="text" name="director">
+	<input type="submit" value="Filter">
+</form>
+<br>
+{{#if filteredSearch}}
+	<h2>Showing only movies directed by: {{director}}<h2>
+	<br>
+{{/if}}
+<table>
+	<thead>
+		<th>Movie</th>
+		<th>Year</th>
+		<th>Director</th>
+	</thead>
+	<tbody>
+		{{#each movies}}
+		<tr>
+			<td>{{this.title}}</td>
+			<td>{{this.year}}</td>
+			<td>{{this.director}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+<br>
+<h3><a href= "/movies/add">Add Movies</a></h3>
+<h3><a href= "/mymovies">My Movies</a></h3>

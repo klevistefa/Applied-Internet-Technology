@@ -1,0 +1,19 @@
+<h1>Movies Added by Me!</h1>
+<hr>
+<table>
+	<thead>
+		<th>Movie</th>
+		<th>Year</th>
+		<th>Director</th>
+	</thead>
+	<tbody>
+		{{#each myMovies}}
+		<tr>
+			<td>{{this.title}}</td>
+			<td>{{this.year}}</td>
+			<td>{{this.director}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+<h3><a href= "/movies">Movies List</a></h3>

@@ -1,0 +1,65 @@
+body {
+	text-align: center;
+  background-color: white;
+}
+
+ul {
+	list-style: none;
+	display: inline;
+}
+
+.submitButton {
+	background-color: yellow;
+}
+
+.hexForm {
+	width: 800px;
+	display: inline-block;
+}
+
+.hexForm div {
+	float: left;
+	height: 200px;
+	width: 200px;
+}
+
+label {
+	font-size: 25px;
+}
+
+form {
+	padding-top: 50px;
+}
+
+input {
+	font-size: 50px;
+}
+
+.rForm {
+	background-color: red;
+}
+
+.rLabel {
+	color: red;
+}
+
+.gForm {
+	background-color: green;
+}
+.gLabel {
+	color: green;
+}
+
+.bForm {
+	background-color: blue;
+}
+.bLabel {
+	color: blue;
+}
+
+.shadesForm {
+	background-color: white;
+}
+.shadesLabel {
+	color: white;
+}

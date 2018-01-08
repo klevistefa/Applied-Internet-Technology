@@ -1,0 +1,102 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+   <div class="container">
+       <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">Travel Agency Website</a>
+       </div>
+       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/finances">Finances</a></li>
+                  <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Flights<span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                    <li><a href="/addFlight">Book A Flight</a></li>
+                                    <li><a href="/myFlights">Booked Flights</a></li>
+                              </ul>
+                  </li>
+                  <li><a href="/clients">Clients</a></li>
+                  <li><a href="/settings">Settings</a></li>
+                  <li><a href="/logout"><button type="button" class="btn btn-light btn-xs">Logout</button></a></li>
+            </ul>
+      </div>
+  </div>
+</nav>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Financial Statement</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Airline</th>
+          <th scope="col">Price</th>
+          <th scope="col">Profit %</th>
+          <th scope="col">Profit $</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each financeInfo}}
+          <tr>
+            <td>{{this.date}}</td>
+            <td>{{this.company}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.profit_percentage}}</td>
+            <td>{{this.profit}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <form method="GET" action ="">
+      <label for="startDate">Start Date: </label>
+      <input type="date" name="startDate">
+      <label for="endDate">End Date: </label>
+      <input type="date" name="endDate">
+      <input type="submit" name="Filter!">
+    </form>
+    </div>
+  </div>
+
+  {{#if filtered}}
+    <h3>Showing results from {{startDate}} to {{endDate}}</h3>
+  {{else}}
+    <h3>Showing results for all flights</h3>
+  {{/if}}
+  <ul class="list-group">
+    {{#with summary}}
+    <li class="list-group-item">Total Revenue = {{revenue}}</li>
+    <li class="list-group-item">Gross Proffit = {{grossProfit}}</li>
+    <li class="list-group-item">Total Costs = {{spendings}}</li>
+    <li class="list-group-item">Net Profit = {{netProfit}}</li>
+    <li class="list-group-item"># of flights booked = {{flightsBooked}}</li>
+    <li class="list-group-item">Average Flight Price = {{avgFlightPrice}}</li>
+    {{/with}}
+  </ul>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Flights</h2>
+        <p>
+          Look at all the flights that you booked and financial info. The table provides some details on the financial aspect of each individual flight.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h2>Summary</h2>
+        <p>
+          The summary provides the basic financial data from the list of all flights, or the flights within the selected dates.
+        </p>
+     </div>
+    </div>
+
+    <hr>
+
+    <footer>
+      <p>&copy; 2017 Travel Agency, Inc.</p>
+    </footer>
+  </div>

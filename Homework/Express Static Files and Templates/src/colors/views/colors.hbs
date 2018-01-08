@@ -1,0 +1,39 @@
+<form method="GET" action="">
+  <div class="hexForm">
+    <div>
+      <input class="rForm" type="text" height="20" maxlength="3" size="3" name="red" />
+      <br>
+      <label class="rLabel" for="red">Red</label>
+    </div>
+    <div>
+      <input class="gForm" type="text" height="20" maxlength="3" size="3" name="green" />
+      <br>
+      <label class="gLabel" for="green">Green</label>
+    </div>
+    <div>
+      <input class="bForm" type="text" height="20" maxlength="3" size="3" name="blue" />
+      <br>
+      <label class="bLabel" for="blue">Blue</label>
+    </div>
+    <div>
+      <input class="totalForm" type="text" height="20" maxlength="2" size="3" name="total" />
+      <br>
+      <label class="totalLabel" for="total">How Many?</label>
+    </div>
+  </div>
+  <input type="submit" class="submitButton" value="Generate Colors!"/>
+</form>
+<br>
+<br>
+{{#if queryUndefined}}
+{{else}}
+  {{#if isValid}}
+  <div class = "colors">
+    {{#each colors}}
+        <h4 style = "background-color:{{this.hex}}; color: black">{{this.name}}{{this.hex}}{{this.decimal}}</h4>
+    {{/each}}
+  </div>
+  {{else}}
+    <h2>{{badInput}}</h2>
+  {{/if}}
+{{/if}}

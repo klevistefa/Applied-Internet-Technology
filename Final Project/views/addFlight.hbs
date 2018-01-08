@@ -1,0 +1,121 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+   <div class="container">
+       <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">Travel Agency Website</a>
+       </div>
+       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/finances">Finances</a></li>
+                  <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Flights<span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                    <li><a href="/addFlight">Book A Flight</a></li>
+                                    <li><a href="/myFlights">Booked Flights</a></li>
+                              </ul>
+                  </li>
+                  <li><a href="/clients">Clients</a></li>
+                  <li><a href="/settings">Settings</a></li>
+                  <li><a href="/logout"><button type="button" class="btn btn-light btn-xs">Logout</button></a></li>
+            </ul>
+      </div>
+  </div>
+</nav>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Book a Flight</h1>
+    <form method = "POST" action="">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="client">Client</label>
+          <input type="text" class="form-control" name="client" placeholder="Client Full Name" required>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="airline">Airline</label>
+          <select name="airline" class="form-control" required>
+            {{#each airlines}}
+              <option value="{{this.name}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="origin">Origin</label>
+        <input type="text" class="form-control" name="origin" placeholder="City, State (optional), Country" required>
+      </div>
+
+      <div class="form-group">
+        <label for="destination">Destination</label>
+        <input type="text" class="form-control" name="destination" placeholder="City, State (optional), Country" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="flightType" value="One Way">
+              One-way
+          </label>
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="flightType" value="Two Ways">
+              Two-way
+          </label>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="price">Price</label>
+          <input type="number" class="form-control" name="price" min="0" step="0.01"placeholder="XXX (in dollars)" required>
+        </div>
+        
+        <div class="form-group col-md-2">
+          <label for="bookedTime">Booked Date</label>
+          <input type="date" class="form-control" name="bookedTime" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" name="Add Flight">Add Flight</button>
+      {{#if flightAdded}}
+        <div class="invalid-feedback" style="color:green">
+          Flight added successfully.
+        </div>
+      {{/if}}
+    </form>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Adding a Flight</h2>
+      <p>
+        This page provides the form and the fields needed to add a flight in your records. All the fields are required for sumbission
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h2>Client</h2>
+      <p>
+        Everytime a flight of a new client is added, the site automatically adds it as a client in the list and adds the flight to the client.
+        If the flight is for an existing client the flight is automatically added to the client.
+      </p>
+   </div>
+    <div class="col-md-4">
+      <h2>Finances</h2>
+      <p>
+        Everytime the flight is added, the appropriate amount of points are allocated to the client. The flight price and profit are automatically
+      added to the finances.
+      </p>
+    </div>
+  </div>
+
+  <hr>
+
+  <footer>
+    <p>&copy; 2017 Travel Agency, Inc.</p>
+  </footer>
+</div>

@@ -1,0 +1,147 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Travel Agency Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <form class="navbar-form navbar-right" method="POST">
+        <div class="form-group">
+          <input type="text" placeholder="Username" name="username" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Password" name="password" class="form-control">
+        </div>
+        <input type="submit" value="Sign in" class="btn btn-success">
+        {{#if wrongCredentials}}
+          <div class="invalid-feedback" style="color:red">
+            Incorrect username or password.
+          </div>
+        {{/if}}
+        {{#if redirected}}
+          <div class="invalid-feedback" style="color:red">
+            Please login first to access that page.
+          </div>
+        {{/if}}
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Manage Your Travel Data!</h1>
+    <p>This websites helps small travel agents to keep track of their flights, clients, companies, etc. It provides a friendly user interface and
+    allows you to handle your data easily.</p>
+    {{#if userExists}}
+      <p><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#userExistsModal">Create Account &raquo;</button></p>
+    {{else}}
+      <p><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registerModal">Create Account &raquo;</button></p>
+    {{/if}}
+  </div>
+</div>
+
+{{#if userExists}}
+  <div class="modal fade" id="userExistsModal" tabindex="-1" role="dialog" aria-labelledby="userExistsLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userExistsLabel">Create New Account</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          Sorry, the website provides data management for only one user now. The multiple user functionality is going to be implemented in the near future.
+          Please come back again.
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{{else}}
+
+  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registerModalLabel">Create New Account</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <form method="POST" action="/login/register">
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="username" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="username" placeholder="Username" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="password" class="col-sm-2 col-form-label">Password</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="rent" class="col-sm-2 col-form-label">Rent</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="rent" placeholder="Enter monthly rent expenses" step="0.1" min="0" required>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="password" class="col-sm-2 col-form-label">Utilities</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" name="utilities" placeholder="Entery monthly utilities expenses" step="0.1" min="0" required>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{{/if}}
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Flights</h2>
+      <p>Book flights in a very easy way that automatically adds new clients to the list if it's a new customer. Keep track of your flights and filter them by clients.</p>
+    </div>
+    <div class="col-md-4">
+      <h2>Clients</h2>
+      <p>Provided list of clients along with their booked flights list. You can remove and add new clients as well as their flights.</p>
+   </div>
+    <div class="col-md-4">
+      <h2>Finances</h2>
+      <p>Keep track of your profits and spendings and other statistics needed to evaluate the performance of your travel agency</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <footer>
+    <p>&copy; 2017 Travel Agency, Inc.</p>
+  </footer>
+</div> <!-- /container -->
