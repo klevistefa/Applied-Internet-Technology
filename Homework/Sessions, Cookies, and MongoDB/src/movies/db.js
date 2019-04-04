@@ -10,4 +10,4 @@ const Movie = new mongoose.Schema({
 
 mongoose.model('Movie', Movie);
 
-mongoose.connect('mongodb://kt1372:Andkle9496@localhost/hw05');
+mongoose.connect('mongodb://*****:*****@localhost/hw05');
